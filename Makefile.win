@@ -1,0 +1,67 @@
+# Project: tpfinalTMPL
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = main.o lib/orm/orm.o lib/utils/utils.o src/categoria/categoria.o src/circuito/circuito.o src/seccion/seccion.o src/localidad/localidad.o src/escuela/escuela.o src/partido/partido.o src/mesa/mesa.o src/lista_partido/lista_partido.o src/telegrama_acta/telegrama_acta.o src/telegrama_acta_votos/telegrama_acta_votos.o src/lista_partido_localidad/lista_partido_localidad.o
+LINKOBJ  = main.o lib/orm/orm.o lib/utils/utils.o src/categoria/categoria.o src/circuito/circuito.o src/seccion/seccion.o src/localidad/localidad.o src/escuela/escuela.o src/partido/partido.o src/mesa/mesa.o src/lista_partido/lista_partido.o src/telegrama_acta/telegrama_acta.o src/telegrama_acta_votos/telegrama_acta_votos.o src/lista_partido_localidad/lista_partido_localidad.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc "../../../Program Files (x86)/PostgreSQL/9.2/lib/libpq.lib" -m32 -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/PostgreSQL/9.2/include"
+BIN      = tpfinalTMPL.exe
+CXXFLAGS = $(CXXINCS) -m32 -g3
+CFLAGS   = $(INCS) -m32 -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+lib/orm/orm.o: lib/orm/orm.c
+	$(CC) -c lib/orm/orm.c -o lib/orm/orm.o $(CFLAGS)
+
+lib/utils/utils.o: lib/utils/utils.c
+	$(CC) -c lib/utils/utils.c -o lib/utils/utils.o $(CFLAGS)
+
+src/categoria/categoria.o: src/categoria/categoria.c
+	$(CC) -c src/categoria/categoria.c -o src/categoria/categoria.o $(CFLAGS)
+
+src/circuito/circuito.o: src/circuito/circuito.c
+	$(CC) -c src/circuito/circuito.c -o src/circuito/circuito.o $(CFLAGS)
+
+src/seccion/seccion.o: src/seccion/seccion.c
+	$(CC) -c src/seccion/seccion.c -o src/seccion/seccion.o $(CFLAGS)
+
+src/localidad/localidad.o: src/localidad/localidad.c
+	$(CC) -c src/localidad/localidad.c -o src/localidad/localidad.o $(CFLAGS)
+
+src/escuela/escuela.o: src/escuela/escuela.c
+	$(CC) -c src/escuela/escuela.c -o src/escuela/escuela.o $(CFLAGS)
+
+src/partido/partido.o: src/partido/partido.c
+	$(CC) -c src/partido/partido.c -o src/partido/partido.o $(CFLAGS)
+
+src/mesa/mesa.o: src/mesa/mesa.c
+	$(CC) -c src/mesa/mesa.c -o src/mesa/mesa.o $(CFLAGS)
+
+src/lista_partido/lista_partido.o: src/lista_partido/lista_partido.c
+	$(CC) -c src/lista_partido/lista_partido.c -o src/lista_partido/lista_partido.o $(CFLAGS)
+
+src/telegrama_acta/telegrama_acta.o: src/telegrama_acta/telegrama_acta.c
+	$(CC) -c src/telegrama_acta/telegrama_acta.c -o src/telegrama_acta/telegrama_acta.o $(CFLAGS)
+
+src/telegrama_acta_votos/telegrama_acta_votos.o: src/telegrama_acta_votos/telegrama_acta_votos.c
+	$(CC) -c src/telegrama_acta_votos/telegrama_acta_votos.c -o src/telegrama_acta_votos/telegrama_acta_votos.o $(CFLAGS)
+
+src/lista_partido_localidad/lista_partido_localidad.o: src/lista_partido_localidad/lista_partido_localidad.c
+	$(CC) -c src/lista_partido_localidad/lista_partido_localidad.c -o src/lista_partido_localidad/lista_partido_localidad.o $(CFLAGS)
