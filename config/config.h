@@ -39,8 +39,8 @@ typedef enum { false=0,true=1} bool;
 #define TOK4 "$4"
 #define SERVER "localhost"
 #define PORT "5432"
-#define DB "elector"
+#define DB "Elecciones"
 #define USER "postgres"
-#define PASS "mastervb"
+#define PASS "12345678"
 void *LocalidadObj_static; 
 #endif

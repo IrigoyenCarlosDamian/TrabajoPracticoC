@@ -121,7 +121,7 @@ static void toString_PartidoImpl(void *self)
 {
      obj_Partido *self_o=this(self);
      obj_Partido *sup;     
-     printf("Partido_id: %d  Partido:%s \n",self_o->info.Partido_id,self_o->info.nombre_Partido);
+     printf("Partido_id: %d  Partido:%s \n",self_o->info.nro_Partido,self_o->info.nombre_Partido);
 }
 //----------------------------------------------------
 //implementacion de getters

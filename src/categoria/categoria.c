@@ -116,8 +116,8 @@ static bool saveObj_CategoriaImpl(void *self)
 static void toString_CategoriaImpl(void *self)
 {
      obj_Categoria *self_o=this(self);
-     obj_Categoria *sup;     
-     printf("Categoria_id: %d  Categoria:%s \n",self_o->info.Categoria_id,self_o->info.nombre_Categoria);
+  //   obj_Categoria *sup;     
+     printf(" %d|%s\n",self_o->info.Categoria_id,self_o->info.nombre_Categoria);
 }
 //----------------------------------------------------
 //implementacion de getters

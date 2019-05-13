@@ -1,0 +1,18 @@
+Presione una tecla para continuar . . . 
+Presione una tecla para continuar . . . 
+HAS SELECCIONADO LA OPCION categoria
+Categoria_id: 1  Categoria:Gobernador 
+Categoria_id: 3  Categoria:Consejo Magistratura 
+Categoria_id: 4  Categoria:Intendente 
+Categoria_id: 5  Categoria:Concejales 
+Categoria_id: 6  Categoria:Jefe Comunal 
+Categoria_id: 2  Categoria:Presidente Comunal 
+Presione una tecla para continuar . . . 
+Presione una tecla para continuar . . . 
+HAS SELECCIONADO LA OPCION categoria
+ 1|Gobernador
+ 3|Consejo Magistratura
+ 4|Intendente
+ 5|Concejales
+ 6|Jefe Comunal
+ 2|Presidente Comunal
