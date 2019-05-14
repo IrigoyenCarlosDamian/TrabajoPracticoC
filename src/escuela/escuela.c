@@ -125,7 +125,7 @@ static void toString_EscuelaImpl(void *self)
 {
      obj_Escuela *self_o=this(self);
      obj_Escuela *sup;
-     obj_Localidad *loc = self_o->getLocalidadObj(self_o);
+     obj_Localidad *loc=self_o->getLocalidadObj(self_o);
      printf("Escuela_id: %d  Escuela:%s - direccion: %s - Localidad: %s\n",self_o->info.Escuela_id,self_o->info.nombre_Escuela,self_o->info.dir_Escuela,loc->getNombreLocalidad(loc));
 }
 //----------------------------------------------------

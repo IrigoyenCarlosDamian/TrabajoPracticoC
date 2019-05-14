@@ -32,6 +32,7 @@ typedef struct {
 	void (*setEscuelaId)(void *self,int);
 	//estructura estatica
 	t_Mesa info;    
+	void *(*getEscuelaObj)(void *self);
 }obj_Mesa;
 // funcionalidad publica que se implementa en Mesa.c
 extern obj_Mesa *Mesa_new ();

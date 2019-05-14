@@ -29,24 +29,82 @@
 #define MENOSELE "-l"
 
 
-void categoria(){
-	obj_Categoria *cat;
- 	cat = Categoria_new();
- 	//ca
-	int i=0,size=0;
-  	void *list;
- 	void *itm;
-	size=cat->findAll(cat,&list,NULL);
-    for(i=0;i<size;++i)
-  	{
 
-    itm=((obj_Categoria **)list)[i];
-    ((obj_Categoria*)itm)->toString(itm);
+/********************/
+int OrdAlfabetico(const void *a, const void *b) {
+	
+	obj_Circuito *a1;
+    obj_Circuito *b1;
+    a1 =  *(obj_Circuito **)a;
+    b1 =  *(obj_Circuito **)b; 
+    return(a1->info.Circuito_id-b1->info.Circuito_id);
+    //return strcmp((ib->info.nombre_Circuito,ia->info.nombre_Circuito));
+    //return (ib->getLocalidadId- ia->getLocalidadId);
+    //return (ia->empleado_id - ib->empleado_id);
+    //return strcmp(b1->info.nombre_Circuito,a1->info.nombre_Circuito);
+}
+/*******************************/
+void escuela(){
+	obj_Escuela *escuela;
+	escuela=Escuela_new();
+	int i=0,size=0;
+	void *list;
+	void *itm;
+	size=escuela->findAll(escuela,&list,NULL);
+	for(i=0;i<size;++i){
+    itm=((obj_Circuito **)list)[i];
+    ((obj_Circuito*)itm)->toString(itm);
 	}
   	// librerar memoria
   	destroyObjList(list,size);
   	//destroyObj(secc);
-  	destroyObj(cat);
+  	destroyObj(escuela);
+}
+
+
+/*******************/
+void mesa(){
+    obj_Mesa *mesa;
+ 	mesa =Mesa_new();
+ //	circuito.info.Circuito_id;
+ 	//ca
+	int i=0,size=0;
+  	void *list;
+ 	void *itm;
+	size=mesa->findAll(mesa,&list,NULL);
+	for(i=0;i<size;++i)
+  	{
+    itm=((obj_Mesa**)list)[i];
+    ((obj_Mesa*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(mesa);
+	
+}
+
+
+/******************/
+void circuito(){
+	obj_Circuito *circuito;
+ 	circuito = Circuito_new();
+ //	circuito.info.Circuito_id;
+ 	//ca
+	int i=0,size=0;
+  	void *list;
+ 	void *itm;
+	size=circuito->findAll(circuito,&list,NULL);
+	qsort((obj_Circuito**)list,size,sizeof(obj_Circuito*),OrdAlfabetico);
+    for(i=0;i<size;++i)
+  	{
+    itm=((obj_Circuito **)list)[i];
+    ((obj_Circuito*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(circuito);
 }
 
 
@@ -65,15 +123,16 @@ int main(int argc, char *argv[])
 					system("pause");
 					switch (i){
 						case 0:{
-							categoria();
+						//	categoria();
 							break;
 						}
 						case 1:{
-
+							circuito();
 							printf("ENTRASTE A CIRCUITO\n");
 							break;
 						}
 						case 2:{
+							escuela();
 							printf("ENTRASTE A ESCUELA\n");
 							break;
 						}
@@ -82,6 +141,7 @@ int main(int argc, char *argv[])
 							break;
 						}
 						case 4:{
+							mesa();
 							printf("ENTRASTE A MESA\n");
 							break;
 						}

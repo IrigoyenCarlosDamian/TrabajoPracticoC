@@ -120,8 +120,9 @@ static bool saveObj_MesaImpl(void *self)
 static void toString_MesaImpl(void *self)
 {
      obj_Mesa *self_o=this(self);
-     obj_Mesa *sup;     
-     printf("Mesa_id: %d  nro Mesa:%d \n",self_o->info.Mesa_id,self_o->info.nro_Mesa);
+     obj_Mesa *sup;
+    
+     printf("Mesa_id: %d  nro Mesa:%d   escuela:\n ",self_o->info.Mesa_id,self_o->info.nro_Mesa);
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -176,10 +177,15 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
    t_table *tt=obj->ds;
    if(pos==0)
      snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Mesa_id );
+	if(pos==1)
+		snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Escuela_id);
 /*   if(pos==1)
      snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.nombre_Mesa );*/
    strcat(cad,field);   
 }
+
+
+///--- Implementar relaciones con otras entidades
 //----------------------------------------------------
 static void *init_Mesa(void *self)
 {
@@ -196,6 +202,7 @@ static void *init_Mesa(void *self)
   obj->getNroMesa = getNroMesa_Impl;  
   obj->getCircuitoId = getCircuitoId_Impl;
   obj->getEscuelaId = getEscuelaId_Impl;
+  //obj->getEscuelaObj = getEscuelaObj_Impl;
   /// setters  
   obj->setNroMesa = setNroMesa_Impl;
   obj->setCircuitoId = setCircuitoId_Impl;

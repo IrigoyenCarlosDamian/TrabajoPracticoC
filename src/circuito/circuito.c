@@ -126,7 +126,7 @@ static void toString_CircuitoImpl(void *self)
      obj_Circuito *self_o=this(self);
      obj_Circuito *sup;
      obj_Localidad *loc = self_o->getLocalidadObj(self_o);
-     printf("Circuito_id: %d  Circuito:%s  - localidad:%s \n",self_o->info.Circuito_id,self_o->info.nombre_Circuito,loc->getNombreLocalidad(loc));
+     printf("%d|%s|%s\n",self_o->info.Circuito_id,self_o->info.nombre_Circuito,loc->getNombreLocalidad(loc));
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -190,7 +190,7 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
    if(pos==1)
      snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.letra );
    if(pos==2)
-     snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Seccion_id );
+     snprintf( field, MAX_WHERE_SQL,"%s", obj->info.Seccion_id);
    if(pos==3)
      snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.nombre_Circuito );
    if(pos==4)
