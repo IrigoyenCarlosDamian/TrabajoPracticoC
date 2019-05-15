@@ -5,6 +5,9 @@
 #include "../../lib/utils/utils.h"
 #include "../../lib/orm/orm.h"
 #include "Mesa.h"
+//Inclusiones para resolver obtencion de objetos relacion
+#include "../escuela/escuela.h"
+
 
 THIS(obj_Mesa)
 
@@ -119,10 +122,11 @@ static bool saveObj_MesaImpl(void *self)
 //----------------------------------------------------
 static void toString_MesaImpl(void *self)
 {
-     obj_Mesa *self_o=this(self);
-     obj_Mesa *sup;
-    
-     printf("Mesa_id: %d  nro Mesa:%d   escuela:\n ",self_o->info.Mesa_id,self_o->info.nro_Mesa);
+   	 obj_Mesa *self_o=this(self);
+   	 //obj_Escuela *escuela =self_o->getEscuelaObj(self_o);
+   	 obj_Escuela *sup;
+   	 obj_Escuela *escuela=self_o->getEscuelaObj(self_o);// se invoca asi 
+     printf("Mesa_id: %d  nro Mesa:%d  Escuela: %s \n ",self_o->info.Mesa_id,self_o->info.nro_Mesa,escuela->info.nombre_Escuela);
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -186,6 +190,19 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
 
 
 ///--- Implementar relaciones con otras entidades
+
+///////////////////////////////////
+static void *getEscuelaObj_Impl(void *self){//este es el metodo que busca la clave foranea 
+	
+	obj_Mesa *obj = this(self); //casteo al tipo de dato del .c 
+    obj_Escuela *esc; // castelo al tipo de dato buscado 
+    esc = Escuela_new(); //"nueva instacia"
+    esc->findbykey(esc,obj->info.Escuela_id); // forma de busqueda 
+    return esc;
+	
+}
+
+
 //----------------------------------------------------
 static void *init_Mesa(void *self)
 {
@@ -202,7 +219,7 @@ static void *init_Mesa(void *self)
   obj->getNroMesa = getNroMesa_Impl;  
   obj->getCircuitoId = getCircuitoId_Impl;
   obj->getEscuelaId = getEscuelaId_Impl;
-  //obj->getEscuelaObj = getEscuelaObj_Impl;
+  obj->getEscuelaObj = getEscuelaObj_Impl;
   /// setters  
   obj->setNroMesa = setNroMesa_Impl;
   obj->setCircuitoId = setCircuitoId_Impl;

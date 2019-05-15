@@ -106,9 +106,28 @@ void circuito(){
   	//destroyObj(secc);
   	destroyObj(circuito);
 }
+/***************************************/
+void categoria(){
+	obj_Categoria *categoria;
+ 	categoria=Categoria_new();
+	int i=0,size=0;
+  	void *list;
+ 	void *itm;
+	size=categoria->findAll(categoria,&list,NULL);
+	for(i=0;i<size;++i)
+  	{
+    itm=((obj_Categoria**)list)[i];
+    ((obj_Categoria*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(categoria);
+	
+}
 
 
-
+/***************************************/
 int main(int argc, char *argv[])
 {
    char argumentos[][MAXARG]={"categoria","circuito","escuela","localidad","mesa","partido","seccion"};
@@ -123,7 +142,7 @@ int main(int argc, char *argv[])
 					system("pause");
 					switch (i){
 						case 0:{
-						//	categoria();
+							categoria();
 							break;
 						}
 						case 1:{
