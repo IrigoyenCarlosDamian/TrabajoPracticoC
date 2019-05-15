@@ -7,7 +7,7 @@
 #include "Mesa.h"
 //Inclusiones para resolver obtencion de objetos relacion
 #include "../escuela/escuela.h"
-
+#include "../circuito/circuito.h"
 
 THIS(obj_Mesa)
 
@@ -126,7 +126,8 @@ static void toString_MesaImpl(void *self)
    	 //obj_Escuela *escuela =self_o->getEscuelaObj(self_o);
    	 obj_Escuela *sup;
    	 obj_Escuela *escuela=self_o->getEscuelaObj(self_o);// se invoca asi 
-     printf("Mesa_id: %d  nro Mesa:%d  Escuela: %s \n ",self_o->info.Mesa_id,self_o->info.nro_Mesa,escuela->info.nombre_Escuela);
+   	 obj_Circuito *circuito=self_o->getCircuitoObj(self_o);
+     printf("Mesa_id: %d  nro Mesa:%d  Escuela: %s  Circuito: %s\n ",self_o->info.Mesa_id,self_o->info.nro_Mesa,escuela->info.nombre_Escuela,circuito->info.nombre_Circuito);
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -183,15 +184,29 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
      snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Mesa_id );
 	if(pos==1)
 		snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Escuela_id);
-/*   if(pos==1)
+	if (pos==2)
+		snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Circuito_id);
+		/*   if(pos==1)
      snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.nombre_Mesa );*/
    strcat(cad,field);   
 }
 
 
 ///--- Implementar relaciones con otras entidades
+/*********************************************************/
+static void *getCircuitoObj_Impl(void *self){//este es el metodo que busca la clave foranea 
+	
+	obj_Mesa *obj = this(self); //casteo al tipo de dato del .c 
+    obj_Circuito *circuito; // castelo al tipo de dato buscado 
+    circuito = Circuito_new(); //"nueva instacia"
+    circuito->findbykey(circuito,obj->info.Circuito_id); // forma de busqueda 
+    return circuito;
+	
+}
 
-///////////////////////////////////
+
+
+/*********************************************************/
 static void *getEscuelaObj_Impl(void *self){//este es el metodo que busca la clave foranea 
 	
 	obj_Mesa *obj = this(self); //casteo al tipo de dato del .c 
@@ -220,6 +235,7 @@ static void *init_Mesa(void *self)
   obj->getCircuitoId = getCircuitoId_Impl;
   obj->getEscuelaId = getEscuelaId_Impl;
   obj->getEscuelaObj = getEscuelaObj_Impl;
+  obj->getCircuitoObj= getCircuitoObj_Impl;
   /// setters  
   obj->setNroMesa = setNroMesa_Impl;
   obj->setCircuitoId = setCircuitoId_Impl;

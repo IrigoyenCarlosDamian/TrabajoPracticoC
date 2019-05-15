@@ -160,8 +160,10 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
    if(pos==0)
      snprintf( field, MAX_WHERE_SQL,"%d", obj->info.ListaPartido_id );
    if(pos==1)
-     snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.nombre_ListaPartido );
-   strcat(cad,field);   
+     snprintf( field, MAX_WHERE_SQL,"%s", obj->info.Partido_id);
+   if(pos==2)
+	snprintf( field, MAX_WHERE_SQL,"'%s'", obj->info.nombre_ListaPartido );
+   strcat(cad,field);  
 }
 //----------------------------------------------------
 // Implementar relaciones con otras entidades.

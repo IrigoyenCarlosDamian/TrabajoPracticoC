@@ -43,26 +43,59 @@ int OrdAlfabetico(const void *a, const void *b) {
     //return (ia->empleado_id - ib->empleado_id);
     //return strcmp(b1->info.nombre_Circuito,a1->info.nombre_Circuito);
 }
+
 /*******************************/
-void escuela(){
-	obj_Escuela *escuela;
-	escuela=Escuela_new();
+void seccion(){
+	obj_Seccion *seccion;
+ 	seccion =Seccion_new();
+ //	circuito.info.Circuito_id;
+ 	//ca
 	int i=0,size=0;
-	void *list;
-	void *itm;
-	size=escuela->findAll(escuela,&list,NULL);
-	for(i=0;i<size;++i){
-    itm=((obj_Circuito **)list)[i];
-    ((obj_Circuito*)itm)->toString(itm);
+  	void *list;
+ 	void *itm;
+	size=seccion->findAll(seccion,&list,NULL);
+	for(i=0;i<size;++i)
+  	{
+    itm=((obj_Seccion**)list)[i];
+    ((obj_Seccion*)itm)->toString(itm);
 	}
   	// librerar memoria
   	destroyObjList(list,size);
   	//destroyObj(secc);
-  	destroyObj(escuela);
+  	destroyObj(seccion);
+	
+	
+	
+	
 }
 
 
-/*******************/
+
+
+
+/*******************************/
+void partido(){
+	obj_Partido *partido;
+ 	partido =Partido_new();
+ //	circuito.info.Circuito_id;
+ 	//ca
+	int i=0,size=0;
+  	void *list;
+ 	void *itm;
+	size=partido->findAll(partido,&list,NULL);
+	for(i=0;i<size;++i)
+  	{
+    itm=((obj_Partido**)list)[i];
+    ((obj_Partido*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(partido);
+	
+}
+
+/********************************/
 void mesa(){
     obj_Mesa *mesa;
  	mesa =Mesa_new();
@@ -83,9 +116,47 @@ void mesa(){
   	destroyObj(mesa);
 	
 }
+/*******************************/
+void localidad(){
+	obj_Localidad *localidad;
+	localidad=Localidad_new();
+	int i=0,size=0;
+	void *list;
+	void *itm;
+	size=localidad->findAll(localidad,&list,NULL);
+	for(i=0;i<size;++i){
+    itm=((obj_Localidad **)list)[i];
+    ((obj_Localidad*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(localidad);
+	
+	
+}
+
+/******************************/
+void escuela(){
+	obj_Escuela *escuela;
+	escuela=Escuela_new();
+	int i=0,size=0;
+	void *list;
+	void *itm;
+	size=escuela->findAll(escuela,&list,NULL);
+	for(i=0;i<size;++i){
+    itm=((obj_Circuito **)list)[i];
+    ((obj_Circuito*)itm)->toString(itm);
+	}
+  	// librerar memoria
+  	destroyObjList(list,size);
+  	//destroyObj(secc);
+  	destroyObj(escuela);
+}
 
 
-/******************/
+
+/*****************************/
 void circuito(){
 	obj_Circuito *circuito;
  	circuito = Circuito_new();
@@ -106,6 +177,8 @@ void circuito(){
   	//destroyObj(secc);
   	destroyObj(circuito);
 }
+
+
 /***************************************/
 void categoria(){
 	obj_Categoria *categoria;
@@ -125,8 +198,6 @@ void categoria(){
   	destroyObj(categoria);
 	
 }
-
-
 /***************************************/
 int main(int argc, char *argv[])
 {
@@ -156,6 +227,7 @@ int main(int argc, char *argv[])
 							break;
 						}
 						case 3:{
+							localidad();
 							printf("ENTRASTE A LOCALIDAD\n");
 							break;
 						}
@@ -165,10 +237,12 @@ int main(int argc, char *argv[])
 							break;
 						}
 						case 5:{
+							partido();
 							printf("ENTRASTE A PARTIDO\n");
 							break;
 						}
 						case 6:{
+							seccion();
 							printf("ENTRASTE A SECCION\n");
 							break;
 						}

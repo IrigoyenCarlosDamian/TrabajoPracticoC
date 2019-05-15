@@ -22,12 +22,22 @@ typedef struct {
     int (*findbykey)(void *self,int ListaPartidoLocalidad_id);
     //-- getters
     int (*getListaPartidoLocalidadId)(void *self);
-    int (*getPartidoId)(void *self);
-    
+    int (*getListaPartidoId)(void *self);
+    int(*getCategoriaId)(void *self);
+    int (*getLocalidadId)(void *self);
     //-- setters
     void (*setListaPartidoId)(void *self,int);
+    void (*setCategoriaId)(void *self,int);
+    void (*setLocalidadId)(void *self,int);
     
-    
+    //--Relaciones
+    void *(*getListaPartidoObj)(void *self);
+	void *(*getCategoriaObj)(void *self);
+    void *(*getLocalidadObj)(void *self);
+    //--Variables internas para dar soporte a la relacion
+    void *lista_partido_obj;
+    void *categoria_obj;
+    void *localidad_obj;
     //estructura estatica
     t_ListaPartidoLocalidad info;    
 }obj_ListaPartidoLocalidad;
