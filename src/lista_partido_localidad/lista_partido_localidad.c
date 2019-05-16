@@ -5,6 +5,9 @@
 #include "../../lib/utils/utils.h"
 #include "../../lib/orm/orm.h"
 #include "lista_partido_localidad.h"
+#include "../lista_partido/lista_partido.h"
+#include "../categoria/categoria.h"
+#include "../localidad/localidad.h"
 
 THIS(obj_ListaPartidoLocalidad)
 
@@ -12,6 +15,8 @@ void CopyDataListaPartidoLocalidad (t_ListaPartidoLocalidad *dest,t_ListaPartido
 {	
 	dest->ListaPartidoLocalidad_id = orig->ListaPartidoLocalidad_id;	
 	dest->ListaPartido_id = orig->ListaPartido_id;
+	dest->Categoria_id=orig->Categoria_id;
+	dest->Localidad_id=orig->Localidad_id;
 }
 //----------------------------------------------------
 //Copiar a puntero de arreglo en posicion dada, desde un result set de base de datos.
@@ -22,6 +27,8 @@ static void fillListaPartidoLocalidadFromDB(void **rw , int rowi,PGresult *res)
     //leer valor desde estructura obtenida de la BD    
 	dsListaPartidoLocalidad->ListaPartidoLocalidad_id = atoi(PQgetvalue(res,rowi,0));
 	dsListaPartidoLocalidad->ListaPartido_id = atoi(PQgetvalue(res,rowi,1));
+	dsListaPartidoLocalidad->Categoria_id= atoi(PQgetvalue(res,rowi,2));
+	dsListaPartidoLocalidad->Localidad_id= atoi(PQgetvalue(res,rowi,3));
 }       
 //----------------------------------------------------
 //Copiar datos desde una variable de struct => puntero a obj_ListaPartidoLocalidad
@@ -114,9 +121,14 @@ static bool saveObj_ListaPartidoLocalidadImpl(void *self)
 //----------------------------------------------------
 static void toString_ListaPartidoLocalidadImpl(void *self)
 {
-     obj_ListaPartidoLocalidad *self_o=this(self);
+	 obj_ListaPartidoLocalidad *self_o=this(self);
      obj_ListaPartidoLocalidad *sup;     
-     printf("ListaPartidoLocalidad_id: %d  \n",self_o->info.ListaPartidoLocalidad_id);
+     obj_ListaPartido *listaPartido=self_o->getListaPartidoObj(self_o);
+     obj_Categoria *categoria= self_o->getCategoriaObj(self_o);
+     obj_Localidad *loc=self_o->getLocalidadObj(self_o);
+	 printf("ListaPartidoLocalidad_id:%d|ListaPartido:%s|Categoira:%s|Localidad:%s\n",self_o->info.ListaPartidoLocalidad_id,listaPartido->getNombreListaPartido(listaPartido),categoria->getNombreCategoria(categoria),loc->getNombreLocalidad(loc));
+	
+
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -132,8 +144,61 @@ static void getValueByPosImpl(void *self,char * cad, int pos)
    obj_ListaPartidoLocalidad *obj = this(self);
    t_table *tt=obj->ds;
    if(pos==0)
-     snprintf( field, MAX_WHERE_SQL,"%d", obj->info.ListaPartidoLocalidad_id );
+   		snprintf( field, MAX_WHERE_SQL,"%d", obj->info.ListaPartidoLocalidad_id );
+    
+	if(pos==1)
+		snprintf( field, MAX_WHERE_SQL,"%d", obj->info.ListaPartido_id);
+	if(pos==2)
+	  snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Categoria_id);
+	if(pos==3)
+	 snprintf( field, MAX_WHERE_SQL,"%d", obj->info.Localidad_id);
+   
    strcat(cad,field);   
+}
+/*****************************************************/
+static void *getListaPartidoObj_Impl(void *self){
+	
+	obj_ListaPartidoLocalidad *obj=this(self);
+	obj_ListaPartido *listaPartido;
+	listaPartido=ListaPartido_new();
+	listaPartido->findbykey(listaPartido,obj->info.ListaPartido_id);
+	return listaPartido;
+	
+}
+/***************************************************/
+static void *getCategoriaObj_Impl(void *self){
+	
+	obj_ListaPartidoLocalidad *obj=this(self);
+	obj_Categoria *categoria;
+	categoria=Categoria_new();
+	categoria->findbykey(categoria,obj->info.Categoria_id);
+	return categoria;
+}
+/*********************************************************/
+static void *getLocalidadObj_Impl(void *self)
+{
+	obj_ListaPartidoLocalidad *obj=this(self);
+	obj_Localidad *localidad;
+	localidad= Localidad_new();
+	localidad->findbykey(localidad,obj->info.Localidad_id);
+	return localidad;
+}
+
+/**********************************************************/
+static void destroyInternal_Impl(void *self)
+{
+	obj_ListaPartidoLocalidad *obj =(obj_ListaPartidoLocalidad*)self;
+	// liberar referencias internas
+	if(obj->listaPartido_obj!=NULL)
+		free(obj->listaPartido_obj);
+		
+	if(obj->categoria_obj!=NULL)
+		free(obj->categoria_obj);
+		
+	if (obj->localidad_obj!=NULL)
+		free(obj->localidad_obj);	
+		
+		  
 }
 //----------------------------------------------------
 static void *init_ListaPartidoLocalidad(void *self)
@@ -143,12 +208,17 @@ static void *init_ListaPartidoLocalidad(void *self)
   obj->info.ListaPartidoLocalidad_id=0;
   
   obj->ds  = &table_ListaPartidoLocalidad;  
+  obj->listaPartido_obj=NULL;
+  obj->categoria_obj=NULL;
+  obj->localidad_obj=NULL;
   obj->isNewObj = true;//marcar como objeto nuevo, si se crea nueva instancia
   obj->getValueByPos = getValueByPosImpl;
   // Inicializar handlers de getters y setters
   /// getters
-  obj->getListaPartidoLocalidadId  	  = getListaPartidoLocalidadId_Impl;
- 
+  obj->getListaPartidoLocalidadId= getListaPartidoLocalidadId_Impl;
+  obj->getListaPartidoObj=getListaPartidoObj_Impl;
+  obj->getCategoriaObj=getCategoriaObj_Impl;
+  obj->getLocalidadObj=getLocalidadObj_Impl;
   /// verificar lo faltante......
   /// setters  
  

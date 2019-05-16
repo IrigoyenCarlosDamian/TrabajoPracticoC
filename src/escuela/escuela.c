@@ -126,7 +126,9 @@ static void toString_EscuelaImpl(void *self)
      obj_Escuela *self_o=this(self);
      obj_Escuela *sup;
      obj_Localidad *loc=self_o->getLocalidadObj(self_o);
-     printf("Escuela_id: %d  Escuela:%s - direccion: %s - Localidad: %s\n",self_o->info.Escuela_id,self_o->info.nombre_Escuela,self_o->info.dir_Escuela,loc->getNombreLocalidad(loc));
+     obj_Circuito *circuito=self_o->getCircuitoObj(self_o);
+     printf("Escuela_Id:%d|Nombre_Escuela:%s|Localidad:%s|Circuito:%s|Direccion:%s\n",self_o->info.Escuela_id,self_o->info.nombre_Escuela,loc->getNombreLocalidad(loc),circuito->getNombreCircuito(circuito),self_o->info.dir_Escuela);
+     //printf("Escuela_id: %d  Nombre_Escuela:%s - direccion: %s - Localidad: %s\n",self_o->info.Escuela_id,self_o->info.nombre_Escuela,self_o->info.dir_Escuela,loc->getNombreLocalidad(loc));
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -236,6 +238,7 @@ static void destroyInternal_Impl(void *self)
 	  free(obj->localidad_obj);
 	if(obj->circuito_obj!=NULL)
 	  free(obj->circuito_obj);
+	  
 }
 //----------------------------------------------------
 static void *init_Escuela(void *self)

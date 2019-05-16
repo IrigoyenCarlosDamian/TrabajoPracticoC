@@ -29,15 +29,17 @@ typedef struct {
     void (*setListaPartidoId)(void *self,int);
     void (*setCategoriaId)(void *self,int);
     void (*setLocalidadId)(void *self,int);
-    
     //--Relaciones
     void *(*getListaPartidoObj)(void *self);
 	void *(*getCategoriaObj)(void *self);
     void *(*getLocalidadObj)(void *self);
+
     //--Variables internas para dar soporte a la relacion
-    void *lista_partido_obj;
+    void *listaPartido_obj;
     void *categoria_obj;
     void *localidad_obj;
+    //geter objet relacion
+ 
     //estructura estatica
     t_ListaPartidoLocalidad info;    
 }obj_ListaPartidoLocalidad;

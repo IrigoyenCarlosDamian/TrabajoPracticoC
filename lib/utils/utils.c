@@ -7,6 +7,12 @@
 #include "utils.h"
 #include "../../config/config.h"
 
+
+#define MAXARG 30
+#define TOPE 9
+#define MENOSELE "-l"
+
+
 //#define MAXFECHA 17
  //Instancia que permite manipular conexion con el servidor
 //----------------------------------------------------
@@ -178,3 +184,4 @@ char *itoa_simple(char *dest, int i) {
   return dest;
 }
 //----------------------------------------------------
+ 

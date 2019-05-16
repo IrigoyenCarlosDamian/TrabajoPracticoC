@@ -7,6 +7,7 @@
 #include "lista_partido.h"
 //Inclusiones para resolver obtencion de objetos relacion
 #include "../partido/partido.h"
+#include "../circuito/circuito.h"
 
 THIS(obj_ListaPartido)
 
@@ -122,7 +123,8 @@ static void toString_ListaPartidoImpl(void *self)
      obj_ListaPartido *self_o=this(self);
      obj_ListaPartido *sup; 
      obj_Partido *part = self_o->getPartidoObj(self_o);
-     printf("ListaPartido_id: %d  ListaPartido:%s - NroPartido:%d \n",self_o->info.ListaPartido_id,self_o->info.nombre_ListaPartido,part->getNroPartido(part));
+    
+     printf("ListaPartido_id: %d  ListaPartido:%s - Partido:%s \n",self_o->info.ListaPartido_id,self_o->info.nombre_ListaPartido,part->getNombrePartido(part));
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -177,14 +179,21 @@ static void *getPartidoObj_Impl(void *self)
 	}
 	return obj->partido_obj;
 }
+/**************************************************/
+
 //----------------------------------------------------
 static void destroyInternal_Impl(void *self)
 {
-	obj_ListaPartido *obj = (obj_ListaPartido *)self;
+	obj_Circuito *obj = (obj_Circuito *)self;
 	// liberar referencias internas
-	if(obj->partido_obj!=NULL) 
-	  free(obj->partido_obj);	
+	if(obj->localidad_obj!=NULL) 
+	  free(obj->localidad_obj);
+	if(obj->seccion_obj!=NULL)
+	  free(obj->seccion_obj);
 }
+
+
+
 //----------------------------------------------------
 static void *init_ListaPartido(void *self)
 {

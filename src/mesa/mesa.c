@@ -127,7 +127,7 @@ static void toString_MesaImpl(void *self)
    	 obj_Escuela *sup;
    	 obj_Escuela *escuela=self_o->getEscuelaObj(self_o);// se invoca asi 
    	 obj_Circuito *circuito=self_o->getCircuitoObj(self_o);
-     printf("Mesa_id: %d  nro Mesa:%d  Escuela: %s  Circuito: %s\n ",self_o->info.Mesa_id,self_o->info.nro_Mesa,escuela->info.nombre_Escuela,circuito->info.nombre_Circuito);
+     printf("Mesa_id: %d  Nro De Mesa:%d  Escuela: %s  Circuito: %s\n ",self_o->info.Mesa_id,self_o->info.nro_Mesa,escuela->info.nombre_Escuela,circuito->info.nombre_Circuito);
 }
 //----------------------------------------------------
 //implementacion de getters
@@ -216,6 +216,21 @@ static void *getEscuelaObj_Impl(void *self){//este es el metodo que busca la cla
     return esc;
 	
 }
+/*******************************************************/
+static void destroyInternal_Impl(void *self)
+{
+	obj_Mesa *obj = (obj_Mesa*)self;
+	// liberar referencias internas
+	if(obj->circuito_obj!=NULL) 
+	  free(obj->circuito_obj);
+	if(obj->escuela_obj!=NULL)
+	  free(obj->escuela_obj);
+}
+
+
+
+
+
 
 
 //----------------------------------------------------
@@ -226,6 +241,8 @@ static void *init_Mesa(void *self)
   obj->info.Mesa_id=0;
   obj->info.nro_Mesa=0;
   obj->ds  = &table_Mesa;  
+  obj->circuito_obj=NULL;
+  obj->escuela_obj=NULL;
   obj->isNewObj = true;//marcar como objeto nuevo, si se crea nueva instancia
   obj->getValueByPos = getValueByPosImpl;
   // Inicializar handlers de getters y setters

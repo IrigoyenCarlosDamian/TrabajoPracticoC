@@ -126,7 +126,8 @@ static void toString_CircuitoImpl(void *self)
      obj_Circuito *self_o=this(self);
      obj_Circuito *sup;
      obj_Localidad *loc = self_o->getLocalidadObj(self_o);
-     printf("%d|%s|%s\n",self_o->info.Circuito_id,self_o->info.nombre_Circuito,loc->getNombreLocalidad(loc));
+     obj_Seccion *seccion=self_o->getSeccionObj(self_o);
+     printf("Circuito_Id:%d|Nombre:%s|Seccion:%s|Localidad:%s\n",self_o->info.Circuito_id,self_o->info.nombre_Circuito,seccion->getNombreSeccion(seccion),loc->getNombreLocalidad(loc));
 }
 //----------------------------------------------------
 //implementacion de getters
